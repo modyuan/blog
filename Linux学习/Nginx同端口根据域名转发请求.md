@@ -1,7 +1,7 @@
 # Nginx同端口根据域名转发请求
 
 
-    #/etc/nginx/site-enable/leanote
+`#/etc/nginx/site-enable/leanote`
 
 ```
 

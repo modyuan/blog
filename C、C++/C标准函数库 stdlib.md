@@ -1,5 +1,9 @@
 # C标准函数库 stdlib.h
-[TOC]
+- [C标准函数库 stdlib.h](#c标准函数库-stdlibh)
+    - [库变量](#库变量)
+    - [库宏](#库宏)
+    - [库函数](#库函数)
+
 stdlib.h 头文件即standard library标准库头文件  
 
 stdlib.h 头文件里包含了C语言的最常用的系统函数。

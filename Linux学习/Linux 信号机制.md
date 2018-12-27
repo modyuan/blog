@@ -1,9 +1,21 @@
 # Linux 信号机制
----------------
+
+- [Linux 信号机制](#linux-信号机制)
+  - [一、信号的基本概念](#一信号的基本概念)
+    - [1、基本概念](#1基本概念)
+    - [2、信号的类型](#2信号的类型)
+  - [二、信号机制](#二信号机制)
+    - [1、内核对信号的基本处理方法](#1内核对信号的基本处理方法)
+    - [2、setjmp和longjmp的作用](#2setjmp和longjmp的作用)
+  - [三、有关信号的系统调用](#三有关信号的系统调用)
+    - [1、signal 系统调用](#1signal-系统调用)
+    - [2、kill 系统调用](#2kill-系统调用)
+    - [3、pause系统调用](#3pause系统调用)
+    - [4、alarm和 setitimer系统调用](#4alarm和-setitimer系统调用)
+  - [四、信号与终端](#四信号与终端)
+  - [五、Windows下的情况](#五windows下的情况)
 
 信号机制是进程之间相互传递消息的一种方法，信号全称为软中断信号，也有人称作软中断。从它的命名可以看出，它的实质和使用很象中断。所以，信号可以说是进程控制的一部分。
-
-[TOC]
 
 ## 一、信号的基本概念 
 
@@ -33,18 +45,18 @@ Linux支持的信号列表如下。很多信号是与机器的体系结构相关
 ```shell
 yuansu@DESKTOP-YUAN:/mnt/c/Users/yuan$ kill -l
 1) SIGHUP      2) SIGINT      3) SIGQUIT      4) SIGILL      5) SIGTRAP
-6) SIGABRT      7) SIGBUS      8) SIGFPE      9) SIGKILL    10) SIGUSR1
-11) SIGSEGV    12) SIGUSR2    13) SIGPIPE    14) SIGALRM    15) SIGTERM
-16) SIGSTKFLT  17) SIGCHLD    18) SIGCONT    19) SIGSTOP    20) SIGTSTP
-21) SIGTTIN    22) SIGTTOU    23) SIGURG      24) SIGXCPU    25) SIGXFSZ
-26) SIGVTALRM  27) SIGPROF    28) SIGWINCH    29) SIGIO      30) SIGPWR
-31) SIGSYS      34) SIGRTMIN    35) SIGRTMIN+1  36) SIGRTMIN+2  37) SIGRTMIN+3
-38) SIGRTMIN+4  39) SIGRTMIN+5  40) SIGRTMIN+6  41) SIGRTMIN+7  42) SIGRTMIN+8
-43) SIGRTMIN+9  44) SIGRTMIN+10 45) SIGRTMIN+11 46) SIGRTMIN+12 47) SIGRTMIN+13
-48) SIGRTMIN+14 49) SIGRTMIN+15 50) SIGRTMAX-14 51) SIGRTMAX-13 52) SIGRTMAX-12
-53) SIGRTMAX-11 54) SIGRTMAX-10 55) SIGRTMAX-9  56) SIGRTMAX-8  57) SIGRTMAX-7
-58) SIGRTMAX-6  59) SIGRTMAX-5  60) SIGRTMAX-4  61) SIGRTMAX-3  62) SIGRTMAX-2
-63) SIGRTMAX-1  64) SIGRTMAX
+2) SIGABRT      7) SIGBUS      8) SIGFPE      9) SIGKILL    10) SIGUSR1
+3)  SIGSEGV    12) SIGUSR2    13) SIGPIPE    14) SIGALRM    15) SIGTERM
+4)  SIGSTKFLT  17) SIGCHLD    18) SIGCONT    19) SIGSTOP    20) SIGTSTP
+5)  SIGTTIN    22) SIGTTOU    23) SIGURG      24) SIGXCPU    25) SIGXFSZ
+6)  SIGVTALRM  27) SIGPROF    28) SIGWINCH    29) SIGIO      30) SIGPWR
+7)  SIGSYS      34) SIGRTMIN    35) SIGRTMIN+1  36) SIGRTMIN+2  37) SIGRTMIN+3
+8)  SIGRTMIN+4  39) SIGRTMIN+5  40) SIGRTMIN+6  41) SIGRTMIN+7  42) SIGRTMIN+8
+9)  SIGRTMIN+9  44) SIGRTMIN+10 45) SIGRTMIN+11 46) SIGRTMIN+12 47) SIGRTMIN+13
+10) SIGRTMIN+14 49) SIGRTMIN+15 50) SIGRTMAX-14 51) SIGRTMAX-13 52) SIGRTMAX-12
+11) SIGRTMAX-11 54) SIGRTMAX-10 55) SIGRTMAX-9  56) SIGRTMAX-8  57) SIGRTMAX-7
+12) SIGRTMAX-6  59) SIGRTMAX-5  60) SIGRTMAX-4  61) SIGRTMAX-3  62) SIGRTMAX-2
+13) SIGRTMAX-1  64) SIGRTMAX
 ```
 常见信号的含义：
 信号| 值| 处理动作 |发出信号的原因

@@ -1,6 +1,19 @@
 # C标准函数库 其他
 ----
-[TOC]
+- [# C标准函数库 其他](#-c标准函数库-其他)
+- [1 string.h](#1-stringh)
+- [2 ctypes.h](#2-ctypesh)
+- [3 assert.h](#3-asserth)
+- [4 iso646.h](#4-iso646h)
+- [5 limits.h](#5-limitsh)
+- [6 stdbool.h](#6-stdboolh)
+- [7 stddef.h](#7-stddefh)
+- [8 math.h](#8-mathh)
+- [9 locale.h](#9-localeh)
+- [10 float.h](#10-floath)
+- [11 stdarg.h](#11-stdargh)
+- [12 signal.h](#12-signalh)
+- [13 setjmp.h](#13-setjmph)
 
 
 一个一个写太蠢了。。。
